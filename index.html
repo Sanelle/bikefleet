@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BikeFleet - Premium Eco-Friendly Delivery</title>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">BikeFleet</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#track">Track</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item"><button class="btn btn-success ms-2" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Now</button></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero vh-100 d-flex align-items-center">
+        <div class="container text-center text-white">
+            <h1 class="display-4 fw-bold mb-4 animate__animated animate__fadeInUp">Fast & Sustainable Deliveries</h1>
+            <p class="lead mb-5 animate__animated animate__fadeInUp delay-1">Zero-emission delivery solutions for modern cities</p>
+            <button class="btn btn-lg btn-light text-success fw-bold animate__animated animate__fadeInUp delay-2" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#bookingModal">
+                Schedule Delivery
+            </button>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 fw-bold">Our Delivery Options</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm hover-effect">
+                        <img src="assets/e-bike.jpg" class="card-img-top" alt="E-Bike">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">E-Bike Express</h5>
+                            <p class="text-muted">Under 5kg parcels • 30-min delivery window</p>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="fas fa-bolt text-success me-2"></i>Up to 15km range</li>
+                                <li class="mb-2"><i class="fas fa-leaf text-success me-2"></i>Carbon neutral</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tracking Section -->
+    <section id="track" class="bg-light py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2 class="fw-bold mb-4">Real-time Package Tracking</h2>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control form-control-lg" placeholder="Enter tracking number">
+                        <button class="btn btn-success">Track</button>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div id="liveMap" class="rounded-3 shadow-sm" style="height: 400px"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Modal -->
+    <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="bookingModalLabel">New Delivery Request</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="deliveryForm" class="needs-validation" novalidate>
+                    <div class="modal-body">
+                        <div class="row g-3">
+                            <!-- Pickup/Dropoff Section -->
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="pickup" 
+                                           placeholder="Enter pickup address" required
+                                           data-address-autocomplete>
+                                    <label for="pickup"><i class="fas fa-map-marker-alt me-2"></i>Pickup Address</label>
+                                    <div class="invalid-feedback">Please enter a valid pickup address</div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="dropoff" 
+                                           placeholder="Enter dropoff address" required
+                                           data-address-autocomplete>
+                                    <label for="dropoff"><i class="fas fa-flag-checkered me-2"></i>Dropoff Address</label>
+                                    <div class="invalid-feedback">Please enter a valid dropoff address</div>
+                                </div>
+                            </div>
+
+                            <!-- Package Details -->
+                            <div class="col-md-4">
+                                <div class="form-floating">
+                                    <input type="number" class="form-control" id="weight" 
+                                           min="0.1" step="0.1" required>
+                                    <label for="weight"><i class="fas fa-weight-hanging me-2"></i>Weight (kg)</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-8">
+                                <div class="d-flex gap-2">
+                                    <div class="form-floating flex-fill">
+                                        <input type="number" class="form-control" id="length" 
+                                               min="1" required>
+                                        <label for="length">Length (cm)</label>
+                                    </div>
+                                    <div class="form-floating flex-fill">
+                                        <input type="number" class="form-control" id="width" 
+                                               min="1" required>
+                                        <label for="width">Width (cm)</label>
+                                    </div>
+                                    <div class="form-floating flex-fill">
+                                        <input type="number" class="form-control" id="height" 
+                                               min="1" required>
+                                        <label for="height">Height (cm)</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Delivery Options -->
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="datetime-local" class="form-control" 
+                                           id="deliveryTime" required>
+                                    <label for="deliveryTime"><i class="fas fa-clock me-2"></i>Preferred Time</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <select class="form-select" id="insurance" required>
+                                        <option value="basic">Basic Coverage (R20)</option>
+                                        <option value="premium">Premium Coverage (R30)</option>
+                                    </select>
+                                    <label for="insurance"><i class="fas fa-shield-alt me-2"></i>Package Insurance</label>
+                                </div>
+                            </div>
+
+                            <!-- Special Instructions -->
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <textarea class="form-control" id="instructions" 
+                                              placeholder="Special instructions" 
+                                              style="height: 100px"></textarea>
+                                    <label for="instructions"><i class="fas fa-comment-dots me-2"></i>Special Instructions</label>
+                                </div>
+                            </div>
+
+                            <!-- Payment Section -->
+                            <div class="col-12">
+                                <div class="border-top pt-3">
+                                    <h6 class="mb-3 fw-bold">Payment Method</h6>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" 
+                                               name="payment" id="card" value="card" required>
+                                        <label class="form-check-label" for="card">
+                                            <i class="fab fa-cc-visa me-2"></i>Credit/Debit Card
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" 
+                                               name="payment" id="wallet" value="wallet">
+                                        <label class="form-check-label" for="wallet">
+                                            <i class="fas fa-wallet me-2"></i>E-Wallet
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" 
+                                               name="payment" id="cod" value="cod">
+                                        <label class="form-check-label" for="cod">
+                                            <i class="fas fa-rupee-sign me-2"></i>Cash on Delivery
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Promo Code -->
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" 
+                                           placeholder="Promo code" id="promoCode">
+                                    <button class="btn btn-outline-secondary" type="button">
+                                        Apply
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Price Summary -->
+                            <div class="col-md-6">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-title fw-bold">Price Estimate</h6>
+                                        <div class="d-flex justify-content-between">
+                                            <span>Base Fare:</span>
+                                            <span id="basePrice">R20</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <span>Insurance:</span>
+                                            <span id="insuranceCost">R0</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between fw-bold">
+                                            <span>Total:</span>
+                                            <span id="totalPrice">R20</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success w-100 py-3 fw-bold">
+                            Confirm Booking (R<span id="finalPrice">20</span>)
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h5 class="fw-bold mb-3">BikeFleet</h5>
+                    <p>Committed to sustainable urban logistics</p>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="fw-bold">Quick Links</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#services" class="text-white text-decoration-none">Services</a></li>
+                        <li><a href="#track" class="text-white text-decoration-none">Tracking</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="fw-bold">Contact</h6>
+                    <p>24/7 Support: <a href="tel:+1234567890" class="text-white">+1 (234) 567-890</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
+    <script src="app.js"></script>
+</body>
+</html>"
